@@ -9,6 +9,9 @@ android {
         targetSdkVersion 19
         versionCode 1
         versionName "1.0"
+        testPackageName "com.example.exampleapp.test"
+        testInstrumentationRunner "com.example.exampleapp.test.TestRunner"
+        testFunctionalTest true
     }
     buildTypes {
         release {
@@ -30,4 +33,7 @@ dependencies {
     compile 'com.android.support:support-v4:+'
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.android.support:gridlayout-v7:+'
+    instrumentTestCompile ('junit:junit:4.10') {
+        exclude module: 'hamcrest-core'
+    }
 }
