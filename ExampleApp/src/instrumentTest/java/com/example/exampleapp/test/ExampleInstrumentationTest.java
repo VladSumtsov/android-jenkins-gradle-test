@@ -19,6 +19,12 @@ public class ExampleInstrumentationTest extends ActivityInstrumentationTestCase2
     public void testMainActivity() {
         // Start the main activity of the application under test
         mActivity = getActivity();
+        mActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mActivity.getActionBar().setSelectedNavigationItem(1);
+            }
+        });
 
         // Stop the activity - The onDestroy() method should save the state of the Spinner
         mActivity.finish();
@@ -26,7 +32,7 @@ public class ExampleInstrumentationTest extends ActivityInstrumentationTestCase2
         // Re-start the Activity - the onResume() method should restore the state of the Spinner
         mActivity = getActivity();
 
-        assertEquals(true, false);
+        assertEquals(mActivity.getActionBar().getSelectedNavigationIndex(), 1);
 
     }
 }

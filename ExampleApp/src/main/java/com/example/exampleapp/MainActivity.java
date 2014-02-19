@@ -1,23 +1,35 @@
 package com.example.exampleapp;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements ActionBar.OnNavigationListener {
+
+    public static final String ARG_SPINNER_POSITION = "SPINNER_POSITION";
+    private ArrayAdapter<String> mSpinnerAdapter;
+    private ActionBar mActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mActionBar = getSupportActionBar();
+        mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        mSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item);
+        mSpinnerAdapter.add("Item 1");
+        mSpinnerAdapter.add("Item 2");
+        mSpinnerAdapter.add("Item 3");
+        mActionBar.setListNavigationCallbacks(mSpinnerAdapter, this);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -26,6 +38,18 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(ARG_SPINNER_POSITION, mActionBar.getSelectedNavigationIndex());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        int spinnerPosition = savedInstanceState.getInt("SPINNER_POSITION", 0);
+        mActionBar.setSelectedNavigationItem(spinnerPosition);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -45,6 +69,11 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(int i, long l) {
+        return false;
     }
 
     /**
