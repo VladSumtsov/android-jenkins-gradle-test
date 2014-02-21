@@ -10,6 +10,7 @@ public class TestRunner extends InstrumentationTestRunner {
     public TestSuite getAllTests() {
         InstrumentationTestSuite suite = new InstrumentationTestSuite(this);
         suite.addTestSuite(ExampleInstrumentationTest.class);
+        suite.addTestSuite(ExampleRobotiumTest.class);
         return suite;
     }
 

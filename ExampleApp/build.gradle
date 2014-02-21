@@ -33,7 +33,8 @@ dependencies {
     compile 'com.android.support:support-v4:+'
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.android.support:gridlayout-v7:+'
-    instrumentTestCompile ('junit:junit:4.10') {
+    instrumentTestCompile('junit:junit:4.10') {
         exclude module: 'hamcrest-core'
     }
+    instrumentTestCompile('com.jayway.android.robotium:robotium-solo:4.3.1')
 }
