@@ -24,7 +24,14 @@ public class ExampleRobotiumTest extends ActivityInstrumentationTestCase2<MainAc
     }
 
     public void testActivity() {
-        solo.assertCurrentActivity("Main Activity", MainActivity.class);
+        solo.assertCurrentActivity("wrong activity", MainActivity.class);
+
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        solo.finishOpenedActivities();
+        super.tearDown();
 
     }
 }
