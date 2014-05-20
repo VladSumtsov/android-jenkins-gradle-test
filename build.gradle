@@ -4,7 +4,7 @@ buildscript {
     repositories {
         mavenCentral()
 		maven {
-			url '/Applications/android_sdk/extras/android/m2repository'
+			url '/opt/android-sdk-linux/extras/android/m2repository'
 		}
         
     }
@@ -16,10 +16,5 @@ buildscript {
 allprojects {
     repositories {
         mavenCentral()
-        mavenRepo(url: new File(System.properties['user.home'], '.m2/repository').toURI().toURL())
     }
 }
-
-dependencies {
-    compile 'com.android.support:support-v4:19.0.1'
-    }
