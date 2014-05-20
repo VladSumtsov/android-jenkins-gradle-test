@@ -16,6 +16,7 @@ buildscript {
 allprojects {
     repositories {
         mavenCentral()
+        mavenRepo(url: new File(System.properties['user.home'], '.m2/repository').toURI().toURL())
     }
 }
 
